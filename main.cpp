@@ -44,7 +44,7 @@ using namespace std;
 
     void Start()
     {
-        InitWindow(1200, 800, "Car Game");
+        InitWindow(1200, 800, "Tower Defense");
         SetTargetFPS(60);
         ft = LoadFont("resources/fonts/jupiter_crash.png");
         loadAllTexture.Start();
@@ -59,7 +59,7 @@ using namespace std;
         {
             for (int y = 0; y < 16; y++)
             {
-                map[x][y].Start(x, y, loadAllTexture.loadGrass, loadAllTexture.loadRoad, loadAllTexture.loadCheckpoint, loadAllTexture.loadStartLine1, loadAllTexture.loadStartLine2, loadAllTexture.loadStartPos, loadAllTexture.loadObstacle, loadAllTexture.loadTribune);
+                map[x][y].Start(x, y, loadAllTexture);
             }
         }
         allCheckpointValidate = false;
@@ -121,7 +121,7 @@ using namespace std;
     {
         BeginDrawing();
 
-        ClearBackground(DARKGREEN);
+        ClearBackground(BLACK);
 
 
         for (int x = 0; x < 24; x++)

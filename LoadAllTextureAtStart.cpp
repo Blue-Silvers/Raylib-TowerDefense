@@ -6,19 +6,39 @@ LoadAllTextureAtStart::LoadAllTextureAtStart()
 void LoadAllTextureAtStart::Start()
 {
 	//load texture
-		loadGrass = LoadTexture("kenney_racing-pack/PNG/Tiles/Grass/land_grass04.png");
+		loadGrass = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile124.png");
 
-		loadRoad = LoadTexture("kenney_racing-pack/PNG/Tiles/Asphalt_road/road_asphalt22.png");
+		loadRoad = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile103.png");
 
-		loadCheckpoint = LoadTexture("kenney_racing-pack/PNG/Tiles/Asphalt_road/road_asphalt90.png");
+		loadRoadR = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile104.png");
 
-		loadStartLine1 = LoadTexture("kenney_racing-pack/PNG/Tiles/Asphalt_road/road_asphalt87.png");
+		loadRoadL = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile102.png");
 
-		loadStartLine2 = LoadTexture("kenney_racing-pack/PNG/Tiles/Asphalt_road/road_asphalt89.png");
+		loadTurretPlacement = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile089.png");
 
-		loadStartPos = LoadTexture("kenney_racing-pack/PNG/Tiles/Asphalt_road/road_asphalt84.png");
+		loadRoadOpenAngleRU = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile083.png");
 
-		loadObstacle = LoadTexture("kenney_racing-pack/PNG/Objects/tree_small.png");
+		loadRoadCloseAngleRU = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile081.png");
 
-		loadTribune = LoadTexture("kenney_racing-pack/PNG/Objects/tribune_full.png");
+		loadRoadOpenAngleLU = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile082.png");
+
+		loadRoadCloseAngleLU = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile079.png");
+
+		loadRoadOpenAngleRD = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile106.png");
+
+		loadRoadCloseAngleRD = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile127.png");
+
+		loadRoadOpenAngleLD = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile105.png");
+
+		loadRoadCloseAngleLD = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile125.png");
+
+		loadViewport = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile158.png");
+
+		loadCastle = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile181.png");
+
+		loadRoadU = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile080.png");
+
+		loadRoadD = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile126.png");
+
+		loadRock = LoadTexture("kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile136.png");
 }

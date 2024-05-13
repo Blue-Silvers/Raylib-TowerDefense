@@ -3,109 +3,99 @@ Tile::Tile()
 {
 
 }
-void Tile::Start(int x, int y, Texture2D loadGrass, Texture2D loadRoad, Texture2D loadCheckpoint, Texture2D loadStartLine1, Texture2D loadStartLine2, Texture2D loadStartPos, Texture2D loadObstacle, Texture2D loadTribune)
+void Tile::Start(int x, int y, LoadAllTextureAtStart loadAllTexture)
 {
 	//load texture
 	if (mTileMap[y][x] == (int)TileType::GRASS)
 	{
-		grass = loadGrass;
+		mTileTexture = loadAllTexture.loadGrass;
 	}
 	else if (mTileMap[y][x] == (int)TileType::ROAD)
 	{
-		road = loadRoad;
+		mTileTexture = loadAllTexture.loadRoad;
 	}
-	else if (mTileMap[y][x] == (int)TileType::CHECKPOINT)
+	else if (mTileMap[y][x] == (int)TileType::ROADR)
 	{
-		checkpoint = loadCheckpoint;
-		mCheckpoint = false;
+		mTileTexture = loadAllTexture.loadRoadR;
 	}
-	else if (mTileMap[y][x] == (int)TileType::STARTLINE1)
+	else if (mTileMap[y][x] == (int)TileType::ROADL)
 	{
-		startLine1 = loadStartLine1;
+		mTileTexture = loadAllTexture.loadRoadL;
 	}
-	else if (mTileMap[y][x] == (int)TileType::STARTLINE2)
+	else if (mTileMap[y][x] == (int)TileType::TURRETPLACEMENT)
 	{
-		startLine2 = loadStartLine2;
+		mTileTexture = loadAllTexture.loadTurretPlacement;
 	}
-	else if (mTileMap[y][x] == (int)TileType::STARTPOS)
+	else if (mTileMap[y][x] == (int)TileType::ROADOPENANGLERU)
 	{
-		startPos = loadStartPos;
+		mTileTexture = loadAllTexture.loadRoadOpenAngleRU;
 	}
-	else if (mTileMap[y][x] == (int)TileType::OBSTACLE)
+	else if (mTileMap[y][x] == (int)TileType::ROADCLOSEANGLERU)
 	{
-		grass = loadGrass;
-		obstacle = loadObstacle;
+		mTileTexture = loadAllTexture.loadRoadCloseAngleRU;
 	}
-	else if (mTileMap[y][x] == (int)TileType::TRIBUNE)
+	else if (mTileMap[y][x] == (int)TileType::ROADOPENANGLELU)
 	{
-		tribune = loadTribune;
+		mTileTexture = loadAllTexture.loadRoadOpenAngleLU;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROADCLOSEANGLELU)
+	{
+		mTileTexture = loadAllTexture.loadRoadCloseAngleLU;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROADOPENANGLERD)
+	{
+		mTileTexture = loadAllTexture.loadRoadOpenAngleRD;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROADCLOSEANGLERD)
+	{
+		mTileTexture = loadAllTexture.loadRoadCloseAngleRD;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROADOPENANGLELD)
+	{
+		mTileTexture = loadAllTexture.loadRoadOpenAngleLD;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROADCLOSEANGLELD)
+	{
+		mTileTexture = loadAllTexture.loadRoadCloseAngleLD;
+	}
+	else if (mTileMap[y][x] == (int)TileType::VIEWPORT)
+	{
+		mTileTexture = loadAllTexture.loadViewport;
+	}
+	else if (mTileMap[y][x] == (int)TileType::CASTLE)
+	{
+		mTileTexture = loadAllTexture.loadGrass;
+		mTileTexture2 = loadAllTexture.loadCastle;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROADU)
+	{
+		mTileTexture = loadAllTexture.loadRoadU;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROADD)
+	{
+		mTileTexture = loadAllTexture.loadRoadD;
+	}
+	else if (mTileMap[y][x] == (int)TileType::ROCK)
+	{
+		mTileTexture = loadAllTexture.loadGrass;
+		mTileTexture2 = loadAllTexture.loadRock;
 	}
 }
 int Tile::Update(Car car, int x, int y, bool activeEnd)
 {
-	if (mCheckpoint == false && car.mPlayerX + car.mPlayerSizeX / 2 > mTileX * x && car.mPlayerX + car.mPlayerSizeX / 2 < mTileX * x + mTileSize && car.mPlayerY + car.mPlayerSizeY / 2 > mTileY * y && car.mPlayerY + car.mPlayerSizeY / 2 < mTileY * y + mTileSize)
-	{
-		mCheckpoint = true;
-		mValidateCheckpoint = true;
-		return 1;
-	}
-	if (activeEnd == true && car.mPlayerX + car.mPlayerSizeX / 2 > mTileX * x && car.mPlayerX + car.mPlayerSizeX / 2 < mTileX * x + mTileSize && car.mPlayerY + car.mPlayerSizeY / 2 > mTileY * y && car.mPlayerY + car.mPlayerSizeY / 2 < mTileY * y + mTileSize)
-	{
-		if (mTileMap[y][x] == (int)TileType::STARTLINE1 || mTileMap[y][x] == (int)TileType::STARTLINE2)
-		{
-			return 2;
-		}
-	}
-	if (car.mPlayerX + car.mPlayerSizeX / 2 > mTileX * x && car.mPlayerX + car.mPlayerSizeX / 2 < mTileX * x + mTileSize && car.mPlayerY + car.mPlayerSizeY / 2 > mTileY * y && car.mPlayerY + car.mPlayerSizeY / 2 < mTileY * y + mTileSize)
-	{
-		if (mTileMap[y][x] == (int)TileType::GRASS)
-		{
-			return 3;
-		}
-	}
-	if (car.mPlayerX + car.mPlayerSizeX > mTileX * x && car.mPlayerX < mTileX * x + mTileSize && car.mPlayerY + car.mPlayerSizeY > mTileY * y + mTileSize && car.mPlayerY - car.mPlayerSizeY < mTileY * y + mTileSize)
-	{
-		if (mTileMap[y][x] == (int)TileType::OBSTACLE || mTileMap[y][x] == (int)TileType::TRIBUNE || mTileMap[y][x] == 9)
-		{
-			return 4;
-		}
-	}
+	return 10;
 }
 void Tile::Draw(int x, int y)
 {
 	Rectangle rec{ mTileX * x, mTileY * y, mTileSize, mTileSize };
 	Vector2 origin{ 0, 0};
-	if (mTileMap[y][x]== (int)TileType::GRASS)
+	DrawTexturePro(mTileTexture, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
+	if (mTileMap[y][x] == (int)TileType::ROCK)
 	{
-		DrawTexturePro(grass, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
+		DrawTexturePro(mTileTexture2, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
 	}
-	else if (mTileMap[y][x] == (int)TileType::ROAD)
+	else if (mTileMap[y][x] == (int)TileType::CASTLE)
 	{
-		DrawTexturePro(road, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
-	}
-	else if (mTileMap[y][x] == (int)TileType::CHECKPOINT)
-	{
-		DrawTexturePro(checkpoint, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
-	}
-	else if (mTileMap[y][x] == (int)TileType::STARTLINE1)
-	{
-		DrawTexturePro(startLine1, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
-	}
-	else if (mTileMap[y][x] == (int)TileType::STARTLINE2)
-	{
-		DrawTexturePro(startLine2, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
-	}
-	else if (mTileMap[y][x] == (int)TileType::STARTPOS)
-	{
-		DrawTexturePro(startPos, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
-	}
-	else if (mTileMap[y][x] == (int)TileType::OBSTACLE)
-	{
-		DrawTexturePro(grass, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
-		DrawTexturePro(obstacle, Rectangle{ 0, 0, 141, 141 }, rec, origin, 0.0f, LIGHTGRAY);
-	}
-	else if (mTileMap[y][x] == (int)TileType::TRIBUNE)
-	{
-		DrawTexturePro(tribune, Rectangle{ 0, 0, 448, 223 }, Rectangle { mTileX * x, mTileY * y, mTileSize *3, mTileSize *2 }, origin, 0.0f, WHITE);
+		DrawTexturePro(mTileTexture2, Rectangle{ 0, 0, 128, 128 }, Rectangle { mTileX * (float)( x - 2.5), mTileY * (y - 2), mTileSize *3, mTileSize *3 }, origin, 0.0f, WHITE);
 	}
 }
