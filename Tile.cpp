@@ -82,7 +82,7 @@ void Tile::Start(int x, int y, LoadAllTextureAtStart loadAllTexture)
 		mTileTexture2 = loadAllTexture.loadRock;
 	}
 }
-int Tile::Update(Car car, int x, int y, bool activeEnd)
+int Tile::Update(Money money, int x, int y, int costValue)
 {
 	if (mTileMap[y][x] == (int)TileType::TURRETPLACEMENT)
 	{
@@ -97,16 +97,20 @@ int Tile::Update(Car car, int x, int y, bool activeEnd)
 				
 				if (mDelay >= 0.5) 
 				{
-					if (turret.mTurretUpgrade == false && turret.mTurretHere == true)
+					if (turret.mTurretUpgrade == false && turret.mTurretHere == true && money.mMoney >= 200)
 					{
 						turret.mTurretUpgrade = true;
+						mCost += 200;
+						return -200;
 					}
 				}
 
-				if (turret.mTurretHere == false)
+				if (turret.mTurretHere == false && money.mMoney >= costValue)
 				{
 					mDelay = 0;
 					turret.mTurretHere = true;
+					mCost = costValue; //cout de la tourelle
+					return -costValue;
 				}
 				
 			}
@@ -115,6 +119,7 @@ int Tile::Update(Car car, int x, int y, bool activeEnd)
 				SetMouseCursor(MOUSE_CURSOR_DEFAULT);
 				turret.mTurretHere = false;
 				turret.mTurretUpgrade = false;
+				return mCost / 2;
 				//destroy turret and loot half money cost
 			}
 		}
@@ -126,9 +131,8 @@ int Tile::Update(Car car, int x, int y, bool activeEnd)
 		}
 	}
 	turret.Update();
-				return 10;
 }
-void Tile::Draw(int x, int y,Font ft)
+void Tile::Draw(Money money, int x, int y, Font ft, int costValue)
 {
 	
 	Rectangle rec{ mTileX * x, mTileY * y, mTileSize, mTileSize };
@@ -147,13 +151,30 @@ void Tile::Draw(int x, int y,Font ft)
 
 	if (mOnTurretPlacement == true)
 	{
+		Color newColor;
 		if (turret.mTurretHere == false)
 		{
-			DrawTextEx(ft, TextFormat("Buy: %03ic", 100), Vector2{ mTileX * x, mTileY * (float)(y - 0.5) }, 18, 1, WHITE);
+			if (money.mMoney >= costValue) 
+			{
+				newColor = WHITE;
+			}
+			else 
+			{
+				newColor = RED;
+			}
+			DrawTextEx(ft, TextFormat("Buy %03ic", costValue), Vector2{ mTileX * x, mTileY * (float)(y - 0.5) }, 18, 1, newColor);
 		}
 		else if (turret.mTurretUpgrade == false)
 		{
-			DrawTextEx(ft, TextFormat("Up: %03ic", 200), Vector2{ mTileX * x, mTileY * (float)(y - 0.5) }, 18, 1, WHITE);
+			if (money.mMoney >= 200)
+			{
+				newColor = WHITE;
+			}
+			else
+			{
+				newColor = RED;
+			}
+			DrawTextEx(ft, TextFormat("Up  %03ic", 200), Vector2{ mTileX * x, mTileY * (float)(y - 0.5) }, 18, 1, newColor);
 		}
 	}
 }

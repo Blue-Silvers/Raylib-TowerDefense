@@ -5,6 +5,8 @@
 #include "Timer.h"
 #include "LoadAllTextureAtStart.h"
 #include "Menus.h"
+#include "Money.h"
+
 
 
 using namespace std;
@@ -21,6 +23,7 @@ using namespace std;
     Timer timer;
     LoadAllTextureAtStart loadAllTexture;
     Menus menus;
+    Money money;
 
     int nbCheckPoint;
     bool allCheckpointValidate = false;
@@ -64,6 +67,7 @@ using namespace std;
         }
         allCheckpointValidate = false;
         timer.Start();
+        money.Start();
     }
 
     void Update()
@@ -83,36 +87,13 @@ using namespace std;
         {
             for (int y = 0; y < 16; y++)
             {
-                
-                if (map[x][y].Update(car, x, y, allCheckpointValidate) == 2) 
+                money.mMoney += map[x][y].Update(money, x, y, 0);
+                if (map[x][y].Update(money, x, y, 0) == 2) 
                 {
                     timer.Pause();
                     menus.GameOver();
                 }
-                else if (map[x][y].Update(car, x, y, allCheckpointValidate) == 3)
-                {
-                    speedMultiply = 0.5;
-                }
-                else if (map[x][y].Update(car, x, y, allCheckpointValidate) == 4)
-                {
-                    speedMultiply = 0;
-                }
-                if (map[x][y].mCheckpoint == false) 
-                {
-                    nbCheckPoint += 1;
-                }
-                if (map[x][y].mValidateCheckpoint == true && x>0 && y>0) 
-                {
-                    map[x][y + 1].mCheckpoint = true;
-                    map[x + 1][y].mCheckpoint = true;
-                    map[x][y - 1].mCheckpoint = true;
-                    map[x - 1][y].mCheckpoint = true;
-                }
             }
-        }
-        if (nbCheckPoint == 0) 
-        {
-            allCheckpointValidate = true;
         }
         timer.Update();
     }
@@ -128,11 +109,12 @@ using namespace std;
         {
             for (int y = 0; y < 16; y++)
             {
-                map[x][y].Draw(x,y, ft);
+                map[x][y].Draw(money, x,y, ft, 0);
             }
         }
 
         timer.Draw(ft);
+        money.Draw(ft);
 
         car.Draw();
 

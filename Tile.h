@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Environement.h"
-#include "Car.h"
+#include "Money.h"
 #include "LoadAllTextureAtStart.h"
 #include "Turret.h"
 
@@ -36,14 +36,15 @@ private:
     bool mOnTurretPlacement = false;
     int mTurretState = 0;
     float mDelay;
+    int mCost;
 
 public:
 
 
     Turret turret;
 	Tile();
-	int Update(Car car, int x, int y, bool activeEnd);
-	void Draw(int x, int y, Font ft);
+	int Update(Money money, int x, int y, int costValue);
+	void Draw(Money money, int x, int y, Font ft, int costValue);
 	void Start(int x, int y,LoadAllTextureAtStart loadAllTexture);
 
     bool mCheckpoint = true;
