@@ -180,3 +180,13 @@ void Tile::Draw(Money money, int x, int y, Font ft, int costValue)
 		}
 	}
 }
+
+bool Tile::HitCastle(int damage) 
+{
+	mCasltleLife -= damage;
+	if (mCasltleLife <= 0)
+	{
+		return false;
+	}
+	else return true;
+}

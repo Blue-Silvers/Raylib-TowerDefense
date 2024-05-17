@@ -10,7 +10,7 @@ void Enemies::Start()
 	 mEnemiesX = 0;
 	 mEnemiesY = 625;
 }
-void Enemies::Update()
+int Enemies::Update()
 {
 	if (mEnemiesY == 625 && mEnemiesX < 275)
 	{
@@ -49,9 +49,9 @@ void Enemies::Update()
 	}
 	else 
 	{
-		//hit
+		return damage;
 	}
-
+	return 0;
 }
 void Enemies::Draw()
 {

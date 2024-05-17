@@ -79,15 +79,22 @@ using namespace std;
         {
             End();
         }
-        nbCheckPoint = 0;
-        enemies.Update();
-        speedMultiply = 1;
+        int enemyDamage = 0;
+        enemyDamage += enemies.Update();
+        
         for (int x = 0; x < 24; x++)
         {
             for (int y = 0; y < 16; y++)
             {
                 money.mMoney += map[x][y].Update(money, x, y, 0);
                 map[x][y].turret.Update();
+                if (enemyDamage > 0) 
+                {
+                    if (map[x][y].HitCastle(enemyDamage) == false) 
+                    {
+                        //GameOver
+                    }
+                }
             }
         }
         timer.Update();

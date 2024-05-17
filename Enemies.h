@@ -10,13 +10,14 @@ class Enemies
 		float mEnemiesSpeed = 100;
 		float mEnemiesRotaion = 0;
 		Texture2D enemiesTexture;
+		int damage = 1;
 
 	public:
 		float mEnemiesX = -50;
 		float mEnemiesY = 625;
 		float mEnemiesSize = 50;
 		Enemies();
-		void Update();
+		int Update();
 		void Draw();
 		void Start();
 };

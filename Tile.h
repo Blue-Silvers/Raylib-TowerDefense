@@ -47,7 +47,7 @@ public:
 	int Update(Money money, int x, int y, int costValue);
 	void Draw(Money money, int x, int y, Font ft, int costValue);
 	void Start(int x, int y,LoadAllTextureAtStart loadAllTexture);
-
+    bool HitCastle(int damage);
     bool mCheckpoint = true;
     bool mValidateCheckpoint = false;
 };
