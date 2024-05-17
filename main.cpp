@@ -1,6 +1,5 @@
 #include "raylib.h"
 #include <iostream>
-#include "Car.h"
 #include "Tile.h"
 #include "Timer.h"
 #include "LoadAllTextureAtStart.h"
@@ -18,7 +17,6 @@ using namespace std;
     void End();
 
     Font ft;
-    Car car;
     Enemies enemies;
     Tile map[24][16];
     Timer timer;
@@ -58,7 +56,6 @@ using namespace std;
     void StartRace()
     {
         int speedMultiply = 1;
-        car.Start();
         enemies.Start();
         for (int x = 0; x < 24; x++)
         {
@@ -83,7 +80,6 @@ using namespace std;
             End();
         }
         nbCheckPoint = 0;
-        car.Update(GetFrameTime(), speedMultiply);
         enemies.Update();
         speedMultiply = 1;
         for (int x = 0; x < 24; x++)
@@ -91,11 +87,7 @@ using namespace std;
             for (int y = 0; y < 16; y++)
             {
                 money.mMoney += map[x][y].Update(money, x, y, 0);
-                if (map[x][y].Update(money, x, y, 0) == 2) 
-                {
-                    timer.Pause();
-                    menus.GameOver();
-                }
+                map[x][y].turret.Update();
             }
         }
         timer.Update();
@@ -119,7 +111,6 @@ using namespace std;
         timer.Draw(ft);
         money.Draw(ft);
 
-        car.Draw();
         enemies.Draw();
 
         menus.Draw(timer.mGetMinute, timer.mGetSecond);

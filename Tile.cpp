@@ -129,8 +129,9 @@ int Tile::Update(Money money, int x, int y, int costValue)
 			mOnTurretPlacement = false;
 			//caché prix
 		}
+		
 	}
-	turret.Update();
+	return 0;
 }
 void Tile::Draw(Money money, int x, int y, Font ft, int costValue)
 {
@@ -145,6 +146,7 @@ void Tile::Draw(Money money, int x, int y, Font ft, int costValue)
 	else if (mTileMap[y][x] == (int)TileType::CASTLE)
 	{
 		DrawTexturePro(mTileTexture2, Rectangle{ 0, 0, 128, 128 }, Rectangle { mTileX * (float)( x - 2.5), mTileY * (y - 2), mTileSize *3, mTileSize *3 }, origin, 0.0f, WHITE);
+		DrawTextEx(ft, TextFormat("Life : %04i / 1000", mCasltleLife), Vector2{ mTileX * (float)(x - 2.5), mTileY * (float)(y - 2.5) }, 20, 2, WHITE);
 	}
 
 	turret.Draw(x, y);

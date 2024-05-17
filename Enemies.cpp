@@ -57,6 +57,5 @@ void Enemies::Draw()
 {
 	Rectangle rec{ mEnemiesX, mEnemiesY, mEnemiesSize, mEnemiesSize };
 	Vector2 origin{ mEnemiesSize / 2, mEnemiesSize / 2 };
-	//DrawRectanglePro(rec, origin, mPlayerRotaion * RAD2DEG, WHITE);
 	DrawTexturePro(enemiesTexture, Rectangle{ 0, 0, 128, 128 }, rec, origin, mEnemiesRotaion * RAD2DEG, PINK);
 }

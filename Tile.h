@@ -37,6 +37,7 @@ private:
     int mTurretState = 0;
     float mDelay;
     int mCost;
+    int mCasltleLife = 1000;
 
 public:
 

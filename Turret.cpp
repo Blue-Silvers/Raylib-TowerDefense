@@ -16,14 +16,7 @@ void Turret::Start()
 }
 void Turret::Update()
 {
-	if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
-	{
-		mTurretRotaion -= mTurretSpeed * DEG2RAD * GetFrameTime();
-	}
-	if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
-	{
-		mTurretRotaion +=  mTurretSpeed * DEG2RAD * GetFrameTime();
-	}
+
 
 }
 void Turret::Draw(int x, int y)
