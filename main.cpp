@@ -6,7 +6,7 @@
 #include "LoadAllTextureAtStart.h"
 #include "Menus.h"
 #include "Money.h"
-
+#include "Enemies.h"
 
 
 using namespace std;
@@ -19,6 +19,7 @@ using namespace std;
 
     Font ft;
     Car car;
+    Enemies enemies;
     Tile map[24][16];
     Timer timer;
     LoadAllTextureAtStart loadAllTexture;
@@ -58,6 +59,7 @@ using namespace std;
     {
         int speedMultiply = 1;
         car.Start();
+        enemies.Start();
         for (int x = 0; x < 24; x++)
         {
             for (int y = 0; y < 16; y++)
@@ -82,6 +84,7 @@ using namespace std;
         }
         nbCheckPoint = 0;
         car.Update(GetFrameTime(), speedMultiply);
+        enemies.Update();
         speedMultiply = 1;
         for (int x = 0; x < 24; x++)
         {
@@ -117,6 +120,7 @@ using namespace std;
         money.Draw(ft);
 
         car.Draw();
+        enemies.Draw();
 
         menus.Draw(timer.mGetMinute, timer.mGetSecond);
         EndDrawing();
