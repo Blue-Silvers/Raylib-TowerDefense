@@ -3,6 +3,7 @@
 #include "Environement.h"
 #include "Car.h"
 #include "LoadAllTextureAtStart.h"
+#include "Turret.h"
 
 class Tile
 {
@@ -32,13 +33,17 @@ private:
     };
 
     Texture2D mTileTexture, mTileTexture2;
-
+    bool mOnTurretPlacement = false;
+    int mTurretState = 0;
+    float mDelay;
 
 public:
 
+
+    Turret turret;
 	Tile();
 	int Update(Car car, int x, int y, bool activeEnd);
-	void Draw(int x, int y);
+	void Draw(int x, int y, Font ft);
 	void Start(int x, int y,LoadAllTextureAtStart loadAllTexture);
 
     bool mCheckpoint = true;

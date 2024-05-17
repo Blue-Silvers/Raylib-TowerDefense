@@ -25,6 +25,7 @@ void Tile::Start(int x, int y, LoadAllTextureAtStart loadAllTexture)
 	else if (mTileMap[y][x] == (int)TileType::TURRETPLACEMENT)
 	{
 		mTileTexture = loadAllTexture.loadTurretPlacement;
+		turret.Start();
 	}
 	else if (mTileMap[y][x] == (int)TileType::ROADOPENANGLERU)
 	{
@@ -83,10 +84,53 @@ void Tile::Start(int x, int y, LoadAllTextureAtStart loadAllTexture)
 }
 int Tile::Update(Car car, int x, int y, bool activeEnd)
 {
-	return 10;
+	if (mTileMap[y][x] == (int)TileType::TURRETPLACEMENT)
+	{
+		mDelay += GetFrameTime();
+		if (CheckCollisionPointRec(GetMousePosition(), { mTileX * x, mTileY * y, mTileSize, mTileSize }))
+		{
+			SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+			mOnTurretPlacement = true;
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+			{
+				SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+				
+				if (mDelay >= 0.5) 
+				{
+					if (turret.mTurretUpgrade == false && turret.mTurretHere == true)
+					{
+						turret.mTurretUpgrade = true;
+					}
+				}
+
+				if (turret.mTurretHere == false)
+				{
+					mDelay = 0;
+					turret.mTurretHere = true;
+				}
+				
+			}
+			if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT))
+			{
+				SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+				turret.mTurretHere = false;
+				turret.mTurretUpgrade = false;
+				//destroy turret and loot half money cost
+			}
+		}
+		else if(mOnTurretPlacement == true)
+		{
+			SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+			mOnTurretPlacement = false;
+			//caché prix
+		}
+	}
+	turret.Update();
+				return 10;
 }
-void Tile::Draw(int x, int y)
+void Tile::Draw(int x, int y,Font ft)
 {
+	
 	Rectangle rec{ mTileX * x, mTileY * y, mTileSize, mTileSize };
 	Vector2 origin{ 0, 0};
 	DrawTexturePro(mTileTexture, Rectangle{ 0, 0, 128, 128 }, rec, origin, 0.0f, WHITE);
@@ -97,5 +141,19 @@ void Tile::Draw(int x, int y)
 	else if (mTileMap[y][x] == (int)TileType::CASTLE)
 	{
 		DrawTexturePro(mTileTexture2, Rectangle{ 0, 0, 128, 128 }, Rectangle { mTileX * (float)( x - 2.5), mTileY * (y - 2), mTileSize *3, mTileSize *3 }, origin, 0.0f, WHITE);
+	}
+
+	turret.Draw(x, y);
+
+	if (mOnTurretPlacement == true)
+	{
+		if (turret.mTurretHere == false)
+		{
+			DrawTextEx(ft, TextFormat("Buy: %03ic", 100), Vector2{ mTileX * x, mTileY * (float)(y - 0.5) }, 18, 1, WHITE);
+		}
+		else if (turret.mTurretUpgrade == false)
+		{
+			DrawTextEx(ft, TextFormat("Up: %03ic", 200), Vector2{ mTileX * x, mTileY * (float)(y - 0.5) }, 18, 1, WHITE);
+		}
 	}
 }

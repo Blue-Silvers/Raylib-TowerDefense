@@ -128,7 +128,7 @@ using namespace std;
         {
             for (int y = 0; y < 16; y++)
             {
-                map[x][y].Draw(x,y);
+                map[x][y].Draw(x,y, ft);
             }
         }
 

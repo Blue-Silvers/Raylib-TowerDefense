@@ -1,1 +1,2 @@
 C:\Users\enzo.lahana\Downloads\Raylib-TowerDefense-main\Raylib-TowerDefense-main\x64\Debug\Raylib Starter Project.exe
+C:\Users\fury8\OneDrive\Documents\GitHub\Raylib-TowerDefense\x64\Debug\Raylib Starter Project.exe
