@@ -6,7 +6,7 @@ Money::Money()
 }
 void Money::Start()
 {
-    mMoney = 0;
+    mMoney = 600;
 }
 void Money::Update()
 {

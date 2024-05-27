@@ -2,7 +2,8 @@
 
 Enemies::Enemies()
 {
-
+	mEnemiesX = 0;
+	mEnemiesY = 625;
 }
 void Enemies::Start()
 {

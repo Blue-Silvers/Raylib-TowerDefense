@@ -1,6 +1,8 @@
 #include "Turret.h"
 
-Turret::Turret()
+#include <vector>
+
+Turret::Turret() 
 {
 
 }
@@ -14,9 +16,14 @@ void Turret::Start()
 	mTurretSpeed = 100;
 	mTurretRotaion = 0;
 }
-void Turret::Update()
+void Turret::Update(Enemies theEnemy)
 {
-
+	mTurretRotaion += mTurretSpeed * DEG2RAD * GetFrameTime();
+	if (theEnemy.mEnemiesX - (mTurretX + mTurretSize/2) + theEnemy.mEnemiesY - (mTurretY + mTurretSize / 2) < mTurretRange)
+	{
+		LockEnemy(theEnemy);
+		mTurretRotaion = 0.5;
+	}
 
 }
 void Turret::Draw(int x, int y)
@@ -35,4 +42,9 @@ void Turret::Draw(int x, int y)
 		Vector2 origin{ mTurretSize / 2, mTurretSize / 2 };
 		DrawTexturePro(mTurretCurentTexture, Rectangle{ 0, 0, 128, 128 }, rec, origin, mTurretRotaion * RAD2DEG, WHITE);
 	}
+}
+
+void Turret::LockEnemy(Enemies theEnemy)
+{
+	mFocusEnemy = theEnemy;
 }

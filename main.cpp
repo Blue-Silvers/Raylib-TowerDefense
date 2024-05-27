@@ -6,6 +6,7 @@
 #include "Menus.h"
 #include "Money.h"
 #include "Enemies.h"
+//#include "GameMemory.h"
 
 
 using namespace std;
@@ -23,6 +24,7 @@ using namespace std;
     LoadAllTextureAtStart loadAllTexture;
     Menus menus;
     Money money;
+    /*GameMemory gameMemory;*/
 
     int nbCheckPoint;
     bool allCheckpointValidate = false;
@@ -71,6 +73,7 @@ using namespace std;
 
     void Update()
     {
+        /*gameMemory.Init();*/
         if (menus.Update() == 1) 
         {
             StartRace();
@@ -87,12 +90,12 @@ using namespace std;
             for (int y = 0; y < 16; y++)
             {
                 money.mMoney += map[x][y].Update(money, x, y, 0);
-                map[x][y].turret.Update();
+                map[x][y].turret.Update(enemies);
                 if (enemyDamage > 0) 
                 {
                     if (map[x][y].HitCastle(enemyDamage) == false) 
                     {
-                        //GameOver
+                        menus.GameOver();
                     }
                 }
             }

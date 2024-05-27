@@ -80,7 +80,7 @@ void Menus::Draw(float minute, float second)
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
 
-        DrawTextEx(mFt, "Epic racing", Vector2{ 300, 50 }, 200, 5, WHITE);
+        DrawTextEx(mFt, "Tower Def", Vector2{ 300, 50 }, 200, 5, WHITE);
 
         DrawTextEx(mFt, "Start", Vector2{ 510, 400 }, 75, 5, WHITE);
         DrawRectangleLines(420, 395, 300, 75, WHITE);
@@ -92,11 +92,11 @@ void Menus::Draw(float minute, float second)
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
 
-        DrawTextEx(mFt, "Congratulation", Vector2{ 200, 50 }, 200, 5, WHITE);
+        DrawTextEx(mFt, "Game over", Vector2{ 400, 50 }, 200, 5, WHITE);
 
         DrawTextEx(mFt, TextFormat("Your time : %02.02f min", minute + second / 100), Vector2{ 300,250 }, 100, 5, WHITE);
 
-        DrawTextEx(mFt, "Retry race", Vector2{ 435, 400 }, 75, 5, WHITE);
+        DrawTextEx(mFt, "Retry", Vector2{ 500, 400 }, 75, 5, WHITE);
         DrawRectangleLines(420, 400, 300, 75, WHITE);
 
         DrawTextEx(mFt, "Main menu", Vector2{ 445, 500 }, 75, 5, WHITE);
